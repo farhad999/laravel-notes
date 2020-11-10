@@ -14,5 +14,8 @@ use App\Http\Controller\NoteController;
 |
 */
 
+Route::resource('/tags', 'App\Http\Controllers\TagController');
 
 Route::get('/', 'App\Http\Controllers\NoteController@index');
+
+

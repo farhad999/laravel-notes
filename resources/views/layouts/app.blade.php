@@ -1,7 +1,8 @@
-<html lang="en">
+<!DOCTYPE html>
     <head>
         <title>Todo App</title>
         <link rel="stylesheet" href="{{asset('/vendor/bootstrap/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{asset('/main.css')}}" />
     </head>
 <body>
     <!-- Navigation menu -->
