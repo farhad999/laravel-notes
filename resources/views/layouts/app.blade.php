@@ -3,6 +3,7 @@
         <title>Todo App</title>
         <link rel="stylesheet" href="{{asset('/vendor/bootstrap/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('/main.css')}}" />
+        <link rel="stylesheet" href="{{asset('/vendor/select2/select2.min.css')}}">
     </head>
 <body>
     <!-- Navigation menu -->
@@ -22,5 +23,10 @@
 <!-- End naivation -->
 
     @yield('main')
+
+<!---Script section -->
+<script src="{{asset('vendor/jquery-3.6.1.min.js')}}"></script>
+<script src="{{asset('vendor/select2/select2.min.js')}}"></script>
+    @yield('scripts')
 </body>
 </html>
