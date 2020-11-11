@@ -16,6 +16,10 @@ use App\Http\Controller\NoteController;
 
 Route::resource('/tags', 'App\Http\Controllers\TagController');
 
+Route::post('/notes', [\App\Http\Controllers\NoteController::class, 'store']);
+
+Route::get('/notes/create', 'App\Http\Controllers\NoteController@create');
+
 Route::get('/', 'App\Http\Controllers\NoteController@index');
 
 
