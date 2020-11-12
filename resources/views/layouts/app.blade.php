@@ -14,7 +14,7 @@
     <a class="nav-link {{request()->is("/") ? 'active' : ''}}" href="/">Notes</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{request()->is("/") ? 'active' : ''}}" href="/tags">Tags</a>
+    <a class="nav-link {{request()->is("tags") ? 'active' : ''}}" href="/tags">Tags</a>
   </li>
 </ul>
 </div>

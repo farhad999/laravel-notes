@@ -8,26 +8,49 @@
         </div>
 
         <div class="row">
-            @foreach($notes as $note)
-                <div class="col-md-3 col-sm-6">
 
-                    <a href="/notes/{{$note->id}}">
-                        <div class="card note-card view-note">
-                            <div class="card-body">
-                                <h5>{{substr($note->title, 0, 50)}}</h5>
-                                <div>{{substr($note->body, 0, 100)}}</div>
-                            </div>
-                            @if(count($note->tags)> 0)
-                                <div class="card-footer d-flex">
-                                    @foreach($note->tags as $tag)
-                                        <button class="mx-1 btn btn-primary">{{$tag->name}}</button>
-                                    @endforeach
+            <div class="col-md-2">
+
+                <ul class="nav nav-pills d-flex flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link {{(request()->is("/") && request('tag') == '') ? 'active' : ''}}" href="/">All Notes</a>
+                    </li>
+                    @foreach($tags as $tag)
+                        <li class="nav-item">
+                            <a class="nav-link {{request('tag') == $tag->id ? 'active' : ''}}" href="?tag={{$tag->id}}">{{$tag->name}}</a>
+                        </li>
+                    @endforeach
+                </ul>
+
+
+            </div>
+
+            <div class="col-md-10">
+                <div class="row">
+                    @foreach($notes as $note)
+                        <div class="col-md-3 col-sm-6">
+
+                            <a href="/notes/{{$note->id}}">
+                                <div class="card note-card view-note">
+                                    <div class="card-body">
+                                        <h5>{{substr($note->title, 0, 50)}}</h5>
+                                        <div>{{substr($note->body, 0, 100)}}</div>
+                                    </div>
+                                    @if(count($note->tags)> 0)
+                                        <div class="card-footer d-flex">
+                                            @foreach($note->tags as $tag)
+                                                <button class="mx-1 btn btn-primary">{{$tag->name}}</button>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 </div>
-                            @endif
+                            </a>
                         </div>
-                    </a>
+                    @endforeach()
                 </div>
-            @endforeach()
+            </div>
+
+
         </div>
     </div>
 

@@ -12,9 +12,20 @@ class NoteController extends Controller
 {
     function index()
     {
-        $notes = Note::with('tags')->get();
 
-        return view("note.index", compact('notes'));
+       // dd(\request()->input('tag'));
+
+        if(\request()->filled('tag')){
+            $notes = Note::whereHas('tags', function($query){
+                $query->where('tags.id', '=', \request()->input('tag'));
+            })->get();
+        }else{
+            $notes = Note::with('tags')->get();
+        }
+
+        $tags = Tag::select('id', 'name')->get();
+
+        return view("note.index", compact('notes', 'tags'));
     }
 
     function create()
