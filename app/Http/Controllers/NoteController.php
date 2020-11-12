@@ -12,7 +12,9 @@ class NoteController extends Controller
 {
     function index()
     {
-        return view("note.index");
+        $notes = Note::with('tags')->get();
+
+        return view("note.index", compact('notes'));
     }
 
     function create()
@@ -36,7 +38,6 @@ class NoteController extends Controller
         $tags = \request()->input('tags');
         $title = \request()->input('title');
         $body = \request()->input('body');
-        $images = \request()->file('images');
         $count = 1;
 
         try {
@@ -49,19 +50,25 @@ class NoteController extends Controller
             $note->tags()->attach($tags);
 
 
-            foreach ($images as $image) {
-                echo $image;
-                $name = time() . '_' . $count . '.' . $image->getClientOriginalExtension();
-                $destinationPath = public_path('/images');
-                $image->move($destinationPath, $name);
+            if(\request()->hasFile('images')) {
 
-                //now save image in database
+                $images = \request()->file('images');
 
-                $noteImage = new NoteImage();
-                $noteImage->image = $name;
-                $noteImage->note()->associate($note);
-                $noteImage->save();
-                $count++;
+                foreach ($images as $image) {
+                    echo $image;
+                    $name = time() . '_' . $count . '.' . $image->getClientOriginalExtension();
+                    $destinationPath = public_path('/images');
+                    $image->move($destinationPath, $name);
+
+                    //now save image in database
+
+                    $noteImage = new NoteImage();
+                    $noteImage->image = $name;
+                    $noteImage->note()->associate($note);
+                    $noteImage->save();
+                    $count++;
+
+                }
 
             }
 
@@ -77,4 +84,12 @@ class NoteController extends Controller
 
         dd(\request()->all());
     }
+
+    function show($id){
+
+        $note = Note::find($id);
+
+        return view('note.view', compact('note'));
+    }
+
 }

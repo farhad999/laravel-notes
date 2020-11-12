@@ -26,6 +26,7 @@
 
 <!---Script section -->
 <script src="{{asset('vendor/jquery-3.6.1.min.js')}}"></script>
+<script src="{{'vendor/bootstrap//js/bootstrap.min.js'}}"></script>
 <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
     @yield('scripts')
 </body>

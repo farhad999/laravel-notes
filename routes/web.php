@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controller\NoteController;
+use App\Http\Controllers\NoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +16,9 @@ use App\Http\Controller\NoteController;
 
 Route::resource('/tags', 'App\Http\Controllers\TagController');
 
-Route::post('/notes', [\App\Http\Controllers\NoteController::class, 'store']);
+Route::get('/notes/{id}', [NoteController::class, 'show']);
+
+Route::post('/notes', [NoteController::class, 'store']);
 
 Route::get('/notes/create', 'App\Http\Controllers\NoteController@create');
 
